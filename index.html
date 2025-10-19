@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Lohith B N — Data Portfolio</title>
+<meta name="description" content="Portfolio of Lohith B N — projects, experience, education, skills, and contact for data analytics, statistics, and business analysis." />
+<meta name="theme-color" content="#0c0f14" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Remove this line to use system fonts only -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== Theme (dark + optional light) ===== */
+  :root{
+    --bg:#0c0f14; --text:#e9edf3; --muted:#9aa7b8;
+    --panel:#10151d; --panel-2:#0d1219;
+    --accent:#16a34a; --accent-2:#65a30d; /* green/lime */
+    --border:1px solid rgba(255,255,255,.08);
+    --ring:0 0 0 3px rgba(22,163,74,.28);
+    color-scheme:dark;
+  }
+  :root.light{
+    --bg:#fbfdff; --text:#0b0e12; --muted:#495866;
+    --panel:#ffffff; --panel-2:#f1f4f8;
+    --accent:#16a34a; --accent-2:#65a30d;
+    --border:1px solid rgba(11,14,18,.10);
+    --ring:0 0 0 3px rgba(22,163,74,.25);
+    color-scheme:light;
+  }
+
+  /* ===== Base ===== */
+  *,*::before,*::after{box-sizing:border-box}
+  html:focus-within{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+    line-height:1.6; letter-spacing:.2px;
+  }
+  img{max-width:100%; display:block}
+  a{color:inherit; text-decoration:none}
+
+  /* Subtle background grid (neutral) */
+  body::before{
+    content:""; position:fixed; inset:0; z-index:-1;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(255,255,255,.045) 25px),
+      repeating-linear-gradient(90deg, transparent, transparent 24px, rgba(255,255,255,.045) 25px);
+    pointer-events:none;
+  }
+
+  /* ===== Shell ===== */
+  .wrap{width:min(1200px, 92%); margin-inline:auto}
+  header.nav{
+    position:sticky; top:0; z-index:20; backdrop-filter:saturate(1.1) blur(8px);
+    background:color-mix(in hsl, var(--bg) 70%, transparent);
+    border-bottom:var(--border);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px 0}
+  .brand{font-weight:800; letter-spacing:.3px}
+  .nav-links{display:flex; gap:16px; flex-wrap:wrap}
+  .nav-links a{color:var(--muted); font-weight:700}
+  .nav-links a:hover, .nav-links a[aria-current="page"]{color:var(--text)}
+  .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; border:var(--border); background:var(--panel); font-weight:800}
+  .btn.primary{background:linear-gradient(135deg, var(--accent), var(--accent-2)); color:#07120b; box-shadow:0 10px 26px rgba(22,163,74,.25)}
+  .btn:focus-visible{outline:none; box-shadow:var(--ring)}
+
+  /* secondary/outline button for "Source code" */
+  .btn.ghost{
+    background:transparent;
+    border:var(--border);
+    font-weight:800;
+  }
+  .btn.ghost:hover{ background:var(--panel-2); }
+
+  /* ===== Sections ===== */
+  section{scroll-margin-top:72px; padding:28px 0}
+  h2{margin:0 0 10px; font-size:clamp(1.25rem,2.5vw,1.6rem)}
+  .lead{color:var(--muted)}
+  .card{
+    border:var(--border); border-radius:18px; padding:18px; background:
+      linear-gradient(180deg, color-mix(in hsl, var(--panel) 92%, transparent), color-mix(in hsl, var(--panel) 70%, transparent));
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.02), 0 12px 30px rgba(0,0,0,.25);
+  }
+  .soft{color:var(--muted)}
+
+  /* ===== Hero (Home) ===== */
+  .hero{display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:center}
+  @media (max-width:960px){ .hero{grid-template-columns:1fr} }
+  .hello{font-size:clamp(1.8rem, 3.6vw, 3rem); font-weight:900; margin:.2rem 0 .25rem; line-height:1.2}
+  .iam{display:flex; gap:.5rem; align-items:baseline}
+  .iam .label{color:var(--muted); font-weight:700}
+  .iam .typed{font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-weight:800}
+  .h-sub{color:var(--muted); margin-top:.2rem}
+  .cta-row{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+  .hero-card{
+    border:var(--border); border-radius:18px; padding:16px; background:
+      linear-gradient(180deg, color-mix(in hsl, var(--panel) 92%, transparent), color-mix(in hsl, var(--panel) 70%, transparent));
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.02), 0 18px 40px rgba(0,0,0,.30);
+  }
+  .avatar{width:min(320px,100%); aspect-ratio:1/1; border-radius:18px; object-fit:cover; border:var(--border); margin-inline:auto}
+
+  /* ===== Grids ===== */
+  .grid{display:grid; gap:12px}
+  .cols-3{grid-template-columns:repeat(3,1fr)}
+  .cols-2{grid-template-columns:repeat(2,1fr)}
+  @media (max-width:960px){ .cols-3{grid-template-columns:repeat(2,1fr)} }
+  @media (max-width:640px){ .cols-3, .cols-2{grid-template-columns:1fr} }
+  .tile{border:var(--border); border-radius:14px; padding:12px; background:var(--panel-2)}
+  .tile h4{margin:0 0 6px; font-size:1rem}
+
+  /* ===== Lists / chips ===== */
+  .chips{display:flex; flex-wrap:wrap; gap:8px}
+  .chip{background:var(--panel-2); border:var(--border); border-radius:999px; padding:6px 10px; font-weight:700; font-size:.92rem}
+
+  /* ===== Forms ===== */
+  form .row{display:grid; gap:12px; grid-template-columns:1fr 1fr}
+  @media (max-width:700px){ form .row{grid-template-columns:1fr} }
+  input, textarea{
+    width:100%; background:var(--panel-2); color:var(--text); border:var(--border);
+    border-radius:10px; padding:10px 12px; font:inherit
+  }
+  input:focus-visible, textarea:focus-visible{outline:none; box-shadow:var(--ring)}
+  pre{
+    margin:0; padding:12px; border-radius:12px; background:var(--panel-2); border:var(--border);
+    font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:.9rem; overflow:auto
+  }
+
+  footer{color:var(--muted); text-align:center; padding:16px 0 24px}
+
+  /* ===== Portfolio Highlights (KPIs) ===== */
+  .kpis {display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:10px}
+  @media (max-width:960px){ .kpis{grid-template-columns:repeat(2,1fr)} }
+  .kpi{border:var(--border); border-radius:16px; padding:16px; background:var(--panel-2)}
+  .kpi h3{margin:0; font-size:1.6rem; line-height:1.2}
+  .kpi p{margin:.35rem 0 0; color:var(--muted); font-weight:700}
+  .tag{display:inline-block; border:var(--border); background:var(--panel); border-radius:999px; padding:4px 8px; font-size:.8rem; margin-left:6px}
+
+  /* ===== Case Studies ===== */
+  .casegrid{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+  @media (max-width:960px){ .casegrid{grid-template-columns:1fr} }
+  .case{border:var(--border); border-radius:16px; padding:16px; background:var(--panel-2)}
+  .badge{font-weight:800; font-size:.78rem; color:var(--text); background:linear-gradient(135deg,var(--accent),var(--accent-2)); 
+    padding:4px 8px; border-radius:999px; display:inline-block}
+  .kpirow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+  .kmini{border:var(--border); border-radius:12px; padding:8px 10px; background:var(--panel); font-weight:800}
+</style>
+</head>
+<body>
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="home">
+    <div class="wrap nav-inner">
+      <div class="brand">LBN</div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#home" aria-current="page">Home</a>
+        <a href="#about">About</a>
+        <a href="https://medium.com/" target="_blank" rel="noreferrer">Blog</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div style="display:flex; gap:8px; flex-wrap:wrap">
+        <a class="btn" id="themeToggle" role="button" aria-pressed="false" href="#theme">🌓 Theme</a>
+        <a class="btn" href="https://github.com/Lohithbn12" target="_blank" rel="noreferrer">⭐ GitHub</a>
+        <a class="btn primary" href="assets/resume.pdf" download>⬇ Resume</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-labelledby="intro">
+      <div>
+        <p class="soft" id="intro">Hello, I’m</p>
+        <h1 class="hello">Lohith B N</h1>
+        <div class="iam">
+          <span class="label">I’m a</span>
+          <span class="typed" id="typed"></span>
+        </div>
+        <p class="h-sub">
+          Data professional with an <strong>M.Sc. in Statistics (Bangalore University)</strong>, turning raw data into decisions. 
+          Built anomaly detection and BI that cut false positives <strong>42%</strong> and reduced reporting time <strong>60%</strong>.
+        </p>
+        <div class="cta-row">
+          <a class="btn primary" href="#contact">Contact Me</a>
+          <a class="btn" href="#projects">View My Work</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <img class="avatar" src="assets/profile.jpg" alt="Portrait of Lohith B N" loading="lazy">
+        <div class="soft" style="margin-top:10px; text-align:center">
+          📍 Bangalore, India · <a href="tel:+919945875028">+91 99458 75028</a> · <a href="mailto:lohithbn.s1814182@gmail.com">lohithbn.s1814182@gmail.com</a>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+      <article class="card">
+        <h2>About</h2>
+        <p class="lead">
+          I turn noisy telemetry and business data into crisp, decision-ready insights. I design clean data models,
+          build reliable pipelines, and ship dashboards that help teams move faster. Recognized for structured, creative
+          problem-solving and cross-functional collaboration.
+        </p>
+        <div class="chips" style="margin-top:8px">
+          <span class="chip">Python</span><span class="chip">R</span><span class="chip">SQL</span><span class="chip">Power BI</span>
+          <span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">scikit-learn</span>
+          <span class="chip">Matplotlib</span><span class="chip">Seaborn</span><span class="chip">Time Series</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== PORTFOLIO HIGHLIGHTS (KPIs) ===== -->
+    <!--<section id="highlights">
+      <article class="card">
+        <h2>Portfolio Highlights</h2>
+        <div class="kpis" id="kpis">
+          <div class="kpi"><h3 data-target="28">0</h3><p>Analytics Projects</p></div>
+          <div class="kpi"><h3 data-target="62">0</h3><p>Dashboards & Reports</p></div>
+          <div class="kpi"><h3 data-target="41">0</h3><p>ML/Stat Models<span class="tag">RF · LR · ARIMA</span></p></div>
+          <div class="kpi"><h3 data-target="19">0</h3><p>Stakeholder Teams</p></div>
+        </div>
+      </article>
+    </section>-->
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section id="experience">
+      <article class="card">
+        <h2>Experience</h2>
+
+        <div class="grid cols-2" style="margin-top:6px">
+          <!-- Aether Dynamics -->
+          <div class="tile">
+            <h4>Aether Dynamics — Staff Data Analyst</h4>
+            <div class="soft">Aug 2024 – Present · Bangalore, India</div>
+            <ul class="soft" style="margin:.4rem 0 0 1.1rem">
+              <li>Developed a <strong>Refueling &amp; Draining Detection Portal</strong> with <strong>Flask</strong> and advanced event detection to identify refueling, draining, and fuel anomalies; smoothed noisy time-series with <strong>Savitzky–Golay</strong>.</li>
+              <li>Integrated <strong>AWS DynamoDB</strong> for efficient storage/retrieval, enabling near real-time processing of vehicle logs and fuel data.</li>
+              <li>Conducted comprehensive <strong>data cleaning</strong> on R&amp;D fuel datasets, spreadsheets, and APIs; produced decision-ready viz using <strong>Excel</strong> and <strong>Power BI</strong>.</li>
+              <li>Analyzed portal graphs (fuel, GPS, engine) and summarized inter-org reporting; built dashboards with <strong>KPI slicers</strong>.</li>
+              <li>Applied <strong>Python</strong>, <strong>Time-Series Analysis</strong>, and data interpretation techniques to detect anomalies and monitor patterns.</li>
+            </ul>
+            <div class="chips" style="margin-top:8px">
+              <span class="chip">Flask</span><span class="chip">AWS DynamoDB</span><span class="chip">Anomaly Detection</span><span class="chip">Power BI</span>
+              <span class="chip">Time Series</span>
+            </div>
+            <div class="soft" style="margin-top:8px">Immediate joiner with no notice period.</div>
+          </div>
+
+          <!-- Afame Internship -->
+          <div class="tile">
+            <h4>Afame Technologies — Data Analyst (Internship)</h4>
+            <div class="soft">Apr 2024 – May 2024</div>
+            <ul class="soft" style="margin:.4rem 0 0 1.1rem">
+              <li>Cleaned and preprocessed <strong>HR datasets</strong> with Python; handled missing values &amp; normalized features.</li>
+              <li>Built a <strong>logistic regression</strong> model for Titanic survival (~<strong>78% accuracy</strong>).</li>
+              <li>Presented insights &amp; predictive models to senior leadership for planning.</li>
+            </ul>
+            <div class="chips" style="margin-top:8px">
+              <span class="chip">Python</span><span class="chip">pandas</span><span class="chip">scikit-learn</span><span class="chip">Logistic Regression</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="soft" style="margin-top:10px">
+          (Experience details aligned to your résumé; internship added as requested.)
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education">
+      <article class="card">
+        <h2>Education</h2>
+        <div class="grid cols-2" style="margin-top:6px">
+          <div class="tile">
+            <h4>Master of Science in Statistics</h4>
+            <div class="soft">Bangalore University — Feb 2022 – Nov 2023 · Bangalore</div>
+            <p class="soft" style="margin-top:6px">Graduate study focused on statistical modeling, regression, classification, clustering, ANOVA, and time-series analysis.</p>
+          </div>
+          <div class="tile">
+            <h4>Bachelor of Science</h4>
+            <div class="soft">MES Degree College of Arts, Commerce and Science — Jun 2018 – Oct 2021 · Bangalore</div>
+            <p class="soft" style="margin-top:6px">Undergraduate foundations in mathematics, statistics, and computing.</p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects">
+      <article class="card">
+        <h2>Projects</h2>
+        <div class="grid cols-3">
+          <div class="tile">
+            <h4>Statistical Analysis of ODI Cricketers (2019–2023)</h4>
+            <p class="soft">R · ggplot2 · Logistic Regression · K-means · Random Forest — Ranked/grouped players, predicted outcomes, and compared continental vs Asian performance. </p>
+            <p style="margin-top:8px">
+              <!-- TODO: replace with your real repo if different -->
+              <a class="btn ghost" href="https://github.com/Lohithbn12/odi-cricketers-stats-2019-2023" target="_blank" rel="noreferrer">Source code →</a>
+            </p>
+          </div>
+          <div class="tile">
+            <h4>Netflix Movies &amp; TV Shows — Power BI Dashboard</h4>
+            <p class="soft">
+              Power BI — Interactive exploration of Netflix catalog: title growth, genre mix,
+              maturity ratings, and country distribution with slicers and drill-downs.
+            </p>
+            <p style="margin-top:8px">
+              <!-- Update the href after you create the repo -->
+              <a class="btn ghost" href="https://github.com/Lohithbn12/netflix-powerbi-dashboard" target="_blank"
+                rel="noreferrer">Source code →</a>
+            </p>
+          </div>
+          <div class="tile">
+            <h4>Refueling &amp; Draining Detection Portal</h4>
+            <p class="soft">Flask + AWS DynamoDB — Savitzky–Golay smoothing &amp; event detection APIs; BI front-end with KPI slicers. </p>
+            <p style="margin-top:8px">
+              <!-- TODO: replace with your real repo if different -->
+              <a class="btn ghost" href="https://github.com/Lohithbn12/refueling-draining-portal" target="_blank" rel="noreferrer">Source code →</a>
+            </p>
+          </div>
+          <div class="tile">
+            <h4>Loan Status Prediction</h4>
+            <p class="soft">Python · pandas · scikit-learn — Feature engineering and interpretable model to surface approval drivers vs baseline.</p>
+            <p style="margin-top:8px">
+              <a class="btn ghost" href="https://github.com/Lohithbn12/loan-status-prediction" target="_blank" rel="noreferrer">Source code →</a>
+            </p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== CASE STUDIES (Business Impact) ===== -->
+    <section id="case-studies">
+      <article class="card">
+        <h2>Case Studies (Business Impact)</h2>
+        <div class="casegrid">
+          <div class="case">
+            <div class="badge">Fuel Ops — Telematics</div>
+            <h4 style="margin:.5rem 0 0">Refueling & Draining Detection Portal</h4>
+            <p class="soft">Reduced false positives and surfaced real anomalies in near-real-time using Savitzky–Golay smoothing + rules.</p>
+            <div class="kpirow">
+              <div class="kmini">−42% false positives</div>
+              <div class="kmini">+18% anomaly recall</div>
+              <div class="kmini">↓60% reporting time</div>
+            </div>
+            <ul class="soft" style="margin:.6rem 0 0 1.1rem">
+              <li>Python · Flask · AWS DynamoDB · Time Series</li>
+              <li>Partner teams: Ops, Finance, R&D</li>
+            </ul>
+          </div>
+          <div class="case">
+            <div class="badge">People Analytics</div>
+            <h4 style="margin:.5rem 0 0">HR Attrition Risk Scoring</h4>
+            <p class="soft">Feature-engineered logistic model + explainability to prioritize retention actions.</p>
+            <div class="kpirow">
+              <div class="kmini">AUC 0.82</div>
+              <div class="kmini">Top-decile lift 2.1×</div>
+              <div class="kmini">↑30% targeted saves</div>
+            </div>
+            <ul class="soft" style="margin:.6rem 0 0 1.1rem">
+              <li>Python · pandas · scikit-learn · SHAP</li>
+              <li>Stakeholders: HR, BU Heads</li>
+            </ul>
+          </div>
+          <div class="case">
+            <div class="badge">BI & Forecasting</div>
+            <h4 style="margin:.5rem 0 0">Sales KPI Suite + ATS Forecast</h4>
+            <p class="soft">Power BI + time-series model to forecast weekly pipeline and SLA adherence.</p>
+            <div class="kpirow">
+              <div class="kmini">MAPE 8.7%</div>
+              <div class="kmini">SLA breaches ↓35%</div>
+              <div class="kmini">NPS +12</div>
+            </div>
+            <ul class="soft" style="margin:.6rem 0 0 1.1rem">
+              <li>Power BI · DAX · ARIMA</li>
+              <li>Stakeholders: Sales Ops, CX</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills">
+      <article class="card">
+        <h2>Skills</h2>
+
+        <div class="grid cols-3" style="margin-top:6px">
+          <div class="tile">
+            <h4>Tools &amp; Platforms</h4>
+            <div class="chips">
+              <span class="chip">Python</span><span class="chip">R</span><span class="chip">SQL</span><span class="chip">Power BI</span>
+              <span class="chip">Excel</span><span class="chip">Flask</span><span class="chip">AWS DynamoDB</span><span class="chip">SAS</span>
+            </div>
+          </div>
+          <div class="tile">
+            <h4>Libraries &amp; Packages</h4>
+            <div class="chips">
+              <span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">scikit-learn</span><span class="chip">Matplotlib</span><span class="chip">Seaborn</span><span class="chip">SciPy</span>
+            </div>
+          </div>
+          <div class="tile">
+            <h4>Statistics &amp; ML</h4>
+            <div class="chips">
+              <span class="chip">Hypothesis Testing</span><span class="chip">Regression</span><span class="chip">Classification</span>
+              <span class="chip">Clustering</span><span class="chip">ANOVA</span><span class="chip">Time Series</span>
+              <span class="chip">Decision Trees</span><span class="chip">Random Forest</span><span class="chip">SVM</span>
+            </div>
+          </div>
+          <div class="tile">
+            <h4>Data Visualization</h4>
+            <div class="chips">
+              <span class="chip">Power BI Dashboards</span><span class="chip">ggplot2</span><span class="chip">Matplotlib</span><span class="chip">Geographic Mapping</span>
+            </div>
+          </div>
+          <div class="tile">
+            <h4>Soft Skills</h4>
+            <div class="chips">
+              <span class="chip">Communication</span><span class="chip">Problem-Solving</span><span class="chip">Teamwork</span><span class="chip">Attention to Detail</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== LIVE ANALYTICS DEMO ===== -->
+    <section id="demo">
+      <article class="card">
+        <h2>Live Analytics Demo — A/B Uplift with CI</h2>
+        <p class="lead">A simple experiment: Control vs Variant conversion rates with 95% CIs, plus absolute uplift.</p>
+        <div class="grid cols-2" style="margin-top:8px">
+          <div class="tile">
+            <canvas id="abChart" height="140" aria-label="Conversion chart" role="img"></canvas>
+          </div>
+          <div class="tile">
+            <h4>Key Takeaways</h4>
+            <ul class="soft" id="abBullets" style="margin:.4rem 0 0 1.1rem"></ul>
+            <div class="chips" style="margin-top:10px">
+              <span class="chip">Two-prop z-test</span>
+              <span class="chip">Effect size</span>
+              <span class="chip">CI visualization</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Optional: Embed a BI report (replace URL) -->
+    <!--
+    <section id="bi">
+      <article class="card">
+        <h2>Interactive BI (Embedded)</h2>
+        <div class="tile" style="aspect-ratio:16/9">
+          <iframe title="Power BI" width="100%" height="100%" style="border:0"
+                  src="https://app.powerbi.com/view?r=YOUR_REPORT_ID" allowfullscreen></iframe>
+        </div>
+      </article>
+    </section>
+    -->
+
+    <!-- ===== CERTIFICATIONS ===== -->
+    <section id="certs">
+      <article class="card">
+        <h2>Certifications</h2>
+        <div class="grid cols-2">
+          <div class="tile"><h4>Data Analysis with Python — IBM</h4><p class="soft">pandas, NumPy, viz, applied projects</p></div>
+          <div class="tile"><h4>Power BI — PwC</h4><p class="soft">Data modeling, DAX, interactive dashboards</p></div>
+          <div class="tile"><h4>SQL &amp; Relational Databases — IBM</h4><p class="soft">Joins, normalization, analytics-focused SQL</p></div>
+          <div class="tile"><h4>Analytics on SAS</h4><p class="soft">Statistical workflows &amp; reporting</p></div>
+          <div class="tile"><h4>Excel Skills for Business — JPMorgan Chase &amp; Co.</h4><p class="soft">Advanced formulas, pivots, reporting</p></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== COURSE ===== -->
+    <section id="courses">
+      <article class="card">
+        <h2>Course</h2>
+        <div class="tile">
+          <h4>Data Science Course — Besant Technologies</h4>
+          <div class="soft">Dec 2023 – May 2024 · Bangalore, India</div>
+          <ul class="soft" style="margin:.4rem 0 0 1.1rem">
+            <li>Covered MS Excel, SQL, Power BI, Python, Machine Learning, and Statistics.</li>
+            <li>Hands-on projects with real-world datasets and model deployment.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+      <article class="card">
+        <h2>Contact</h2>
+        <p class="lead">Feel free to reach out for questions or opportunities.</p>
+
+        <div class="grid cols-2" style="margin-top:8px">
+          <div class="tile">
+            <h4>Get in touch</h4>
+            <div class="soft" style="margin-bottom:8px">📍 Bangalore, India · 📞 <a href="tel:+919945875028">+91 99458 75028</a></div>
+            <form action="mailto:lohithbn.s1814182@gmail.com" method="post" enctype="text/plain" onsubmit="return onSubmitContact(event)">
+              <div class="row">
+                <div>
+                  <label for="name" class="soft">Name</label>
+                  <input id="name" name="name" placeholder="Your name" required>
+                </div>
+                <div>
+                  <label for="email" class="soft">Email</label>
+                  <input id="email" name="email" type="email" placeholder="you@example.com" required>
+                </div>
+              </div>
+              <div style="margin-top:8px">
+                <label for="message" class="soft">Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="How can I help?" required></textarea>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;">
+                <small class="soft">Or email: <a href="mailto:lohithbn.s1814182@gmail.com">lohithbn.s1814182@gmail.com</a></small>
+                <button class="btn primary" type="submit">Send Message</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="tile">
+            <h4>Python ML Code Sample</h4>
+            <pre><code># Minimal scikit-learn pipeline
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+X, y = load_data()  # replace with your loader
+Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.25, random_state=42)
+model = RandomForestClassifier(n_estimators=100).fit(Xtr, ytr)
+pred  = model.predict(Xte)
+print(f"Accuracy: {accuracy_score(yte, pred):.2f}")</code></pre>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="soft">© <span id="y"></span> · Built for analytics, stats & business analysis · <span style="font-family:'JetBrains Mono',ui-monospace,monospace;font-weight:800">LBN</span></footer>
+  </main>
+
+<!-- ===== Chart.js CDN (for demo) ===== -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+
+<script>
+  // ===== Theme toggle =====
+  const root=document.documentElement;
+  const saved=localStorage.getItem('theme');
+  const prefersLight=window.matchMedia('(prefers-color-scheme: light)').matches;
+  if((saved==='light')||(!saved&&prefersLight)) root.classList.add('light');
+  const themeBtn=document.getElementById('themeToggle');
+  function setThemeBtn(){
+    themeBtn?.setAttribute('aria-pressed', String(root.classList.contains('light')));
+    if(themeBtn) themeBtn.textContent = root.classList.contains('light') ? '🌙 Dark' : '🌓 Theme';
+  }
+  themeBtn?.addEventListener('click', (e)=>{ e.preventDefault(); const isLight=root.classList.toggle('light'); localStorage.setItem('theme', isLight?'light':'dark'); setThemeBtn(); });
+  setThemeBtn();
+
+  // ===== Typed headline ("I'm a ...") =====
+  const roles = ["Data Analyst", "Business Analyst", "Statistician"]; // focused roles
+  const typed = document.getElementById('typed');
+  let r=0, i=0, erase=false;
+  function tick(){
+    const word = roles[r];
+    if(!erase){
+      i++; typed.textContent = word.slice(0,i);
+      if(i===word.length){ erase=true; setTimeout(tick, 1200); return; }
+    }else{
+      i--; typed.textContent = word.slice(0,i);
+      if(i===0){ erase=false; r=(r+1)%roles.length; }
+    }
+    setTimeout(tick, erase?45:70);
+  }
+  if(typed) tick();
+
+  // ===== Animate KPI counters =====
+  function animateKPIs(){
+    const els=[...document.querySelectorAll('#kpis h3')];
+    const obs=new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(!e.isIntersecting) return;
+        const el=e.target, end=+el.dataset.target, start=0, dur=900, t0=performance.now();
+        function step(t){
+          const p=Math.min(1,(t-t0)/dur), val=Math.floor(start+(end-start)*p);
+          el.textContent=val; if(p<1) requestAnimationFrame(step);
+        } requestAnimationFrame(step); obs.unobserve(el);
+      });
+    },{threshold:.4});
+    els.forEach(el=>obs.observe(el));
+  }
+  animateKPIs();
+
+  // ===== A/B demo (binomial CI + uplift) =====
+  function zCI(p,n,z=1.96){ const se=Math.sqrt(p*(1-p)/n); return [p-(z*se), p+(z*se)]; }
+  function pct(x){ return (100*x).toFixed(1)+'%'; }
+  (function renderAB(){
+    // Example portfolio numbers — replace with your real experiment
+    const control={success: 412, total: 5200}; // 7.92%
+    const variant={success: 498, total: 5100}; // 9.76%
+
+    const pc=control.success/control.total, pv=variant.success/variant.total;
+    const [lc1,uc1]=zCI(pc,control.total), [lc2,uc2]=zCI(pv,variant.total);
+    const uplift = pv-pc;
+
+    // Two-proportion z-test
+    const ppool=(control.success+variant.success)/(control.total+variant.total);
+    const se=Math.sqrt(ppool*(1-ppool)*(1/control.total+1/variant.total));
+    const z = uplift/se, pval = 2*(1-0.5*(1+erf(Math.abs(z)/Math.SQRT2)));
+    function erf(x){ // Abramowitz–Stegun approx
+      const a1=0.254829592,a2=-0.284496736,a3=1.421413741,a4=-1.453152027,a5=1.061405429,p=0.3275911;
+      const sign=x<0?-1:1; x=Math.abs(x);
+      const t=1/(1+p*x); const y=1-((((a5*t+a4)*t+a3)*t+a2)*t+a1)*t*Math.exp(-x*x);
+      return sign*y;
+    }
+
+    // Bullets
+    const bullets=document.getElementById('abBullets');
+    bullets.innerHTML = `
+      <li>Control: <strong>${pct(pc)}</strong> (95% CI ${pct(lc1)} – ${pct(uc1)})</li>
+      <li>Variant: <strong>${pct(pv)}</strong> (95% CI ${pct(lc2)} – ${pct(uc2)})</li>
+      <li>Absolute uplift: <strong>${pct(uplift)}</strong> · z=${z.toFixed(2)} · p=${pval.toExponential(2)}</li>
+      <li>${pval<0.05?'Result is statistically significant at 5%.':'Result is not significant at 5%.'}</li>
+    `;
+
+    // Chart
+    const ctx=document.getElementById('abChart');
+    new Chart(ctx,{
+      type:'bar',
+      data:{
+        labels:['Control','Variant'],
+        datasets:[
+          {label:'Conversion %', data:[pc*100,pv*100]},
+          {label:'CI lower', data:[lc1*100,lc2*100], hidden:true},
+          {label:'CI upper', data:[uc1*100,uc2*100], hidden:true},
+        ]
+      },
+      options:{
+        responsive:true,
+        plugins:{ legend:{display:false}, tooltip:{callbacks:{label:(ctx)=>ctx.raw.toFixed(2)+'%'}}},
+        scales:{ y:{ticks:{callback:(v)=>v+'%'}}}
+      }
+    });
+  })();
+
+  // ===== Misc =====
+  document.getElementById('y').textContent=new Date().getFullYear();
+  function onSubmitContact(e){
+    const n=document.getElementById('name')?.value.trim();
+    const m=document.getElementById('message')?.value.trim();
+    const em=document.getElementById('email')?.value.trim();
+    if(!n||!em||!m){ alert('Please fill all fields.'); e.preventDefault(); return false; }
+    return true;
+  }
+</script>
+</body>
+</html>
